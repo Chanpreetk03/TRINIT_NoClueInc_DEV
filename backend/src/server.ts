@@ -4,9 +4,9 @@
 
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
-import express, {Request, Response} from 'express';
+import express, {NextFunction, Request, Response} from 'express';
 
-import indexRouter from '@src/routes/indexRouter';
+import indexRouter from '@src/routers/indexRouter';
 
 import EnvVars from '@src/constants/EnvVars';
 import {ReasonPhrases, StatusCodes} from 'http-status-codes';
@@ -33,7 +33,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser(EnvVars.CookieProps.Secret));
 
-// Show routes called in console during development
+// Show routers called in console during development
 if (EnvVars.NodeEnv === NodeEnvs.Dev.valueOf()) {
     app.use(morgan('dev'));
 }
@@ -48,7 +48,7 @@ app.get('/', (_: RequireAuthProp<Request>, res: Response) => {
 });
 
 // Add error handler
-app.use((err: Error, _: Request, res: Response) => {
+app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
     console.error(err.stack);
     res.status(StatusCodes.UNAUTHORIZED).json({
         error: ReasonPhrases.UNAUTHORIZED,

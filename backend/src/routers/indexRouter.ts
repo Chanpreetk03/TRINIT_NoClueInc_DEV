@@ -1,5 +1,6 @@
 import {Router} from 'express';
 import jetValidator from 'jet-validator';
+import testRoute from "@src/routers/routes/testRoute";
 
 // **** Variables **** //
 
@@ -22,6 +23,7 @@ indexRouter.get('/health', (_req, res) => {
     res.status(200).send(data);
 });
 
+indexRouter.use('/test', testRoute);
 
 // **** Export default **** //
 
