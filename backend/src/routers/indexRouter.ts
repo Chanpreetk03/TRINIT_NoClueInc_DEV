@@ -1,6 +1,9 @@
 import {Router} from 'express';
 import jetValidator from 'jet-validator';
-import testRoute from "@src/routers/routes/testRoute";
+import testRouter from "@src/routers/routes/testRoute";
+import healthRouter from "@src/routers/routes/healthRoute";
+import userRouter from "@src/routers/routes/userRoute";
+import {ClerkExpressRequireAuth} from "@clerk/clerk-sdk-node";
 
 // **** Variables **** //
 
@@ -11,20 +14,12 @@ indexRouter.get('/', (_req, res) => {
     res.status(200).json({message: 'Server is running'});
 });
 
-// ** Add health route ** //
 
-indexRouter.get('/health', (_req, res) => {
-    const data = {
-        uptime: process.uptime(), // Number of seconds the Node.js process has been running
-        message: 'Ok',
-        date: new Date() // Current date and time
-    };
-
-    res.status(200).send(data);
-});
-
-indexRouter.use('/test', testRoute);
-
+indexRouter.use('/health', healthRouter);
+indexRouter.use('/test', testRouter);
+indexRouter.use('/user',
+    // ClerkExpressRequireAuth(),
+    userRouter)
 // **** Export default **** //
 
 export default indexRouter;
