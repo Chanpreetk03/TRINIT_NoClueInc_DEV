@@ -2,14 +2,13 @@
  * Setup express server.
  */
 
-import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import express, {NextFunction, Request, Response} from 'express';
 
 import indexRouter from '@src/routers/indexRouter';
 
 import {ReasonPhrases, StatusCodes} from 'http-status-codes';
-import {ClerkExpressRequireAuth, RequireAuthProp, StrictAuthProp} from "@clerk/clerk-sdk-node";
+import {RequireAuthProp, StrictAuthProp} from "@clerk/clerk-sdk-node";
 import 'dotenv/config'
 import cors from "cors";
 
@@ -51,7 +50,7 @@ interface ResponseError extends Error {
 }
 
 // Add error handler
-app.use((err: ResponseError, _: Request, res: Response, next: NextFunction) => {
+app.use((err: ResponseError, _: Request, res: Response, _next: NextFunction) => {
     console.error(err);
     if (err.status === undefined) {
         res.status(StatusCodes.UNAUTHORIZED).json({
