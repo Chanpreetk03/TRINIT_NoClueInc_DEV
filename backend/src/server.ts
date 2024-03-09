@@ -11,6 +11,7 @@ import indexRouter from '@src/routers/indexRouter';
 import {ReasonPhrases, StatusCodes} from 'http-status-codes';
 import {ClerkExpressRequireAuth, RequireAuthProp, StrictAuthProp} from "@clerk/clerk-sdk-node";
 import 'dotenv/config'
+import cors from "cors";
 
 // **** Variables **** //
 
@@ -29,6 +30,7 @@ declare global {
 // Basic middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(cors({origin: '*'}))
 
 // Show routers called in console during development
 if (process.env.NODE_ENV === 'development') {
