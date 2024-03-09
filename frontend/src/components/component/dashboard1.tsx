@@ -4,8 +4,10 @@
  */
 import {CardTitle, CardDescription, CardHeader, CardContent, Card} from "@/components/ui/card"
 import {Button} from "@/components/ui/button"
+import {useNavigate} from "react-router-dom";
 
 export function Dashboard1() {
+    const navigate = useNavigate();
     return (
         <Card>
             <CardHeader className="flex flex-col md:flex-row items-center gap-4 md:items-start md:gap-6">
@@ -26,7 +28,9 @@ export function Dashboard1() {
                         <CardDescription>English Teacher</CardDescription>
                     </div>
                 </div>
-                <Button className="ml-auto md:order-first" size="sm">
+                <Button className="ml-auto md:order-first" size="sm" onClick={() => {
+                    navigate('/teacher-signup')
+                }}>
                     Edit Profile
                 </Button>
             </CardHeader>
