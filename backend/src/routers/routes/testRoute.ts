@@ -12,11 +12,4 @@ testRouter.get('/', ClerkExpressRequireAuth(), async (_req, res, next) => {
     res.json(users);
 })
 
-testRouter.use((err: Error, _: Request, res: Response, next: NextFunction) => {
-    console.error(err.stack);
-    res.status(StatusCodes.UNAUTHORIZED).json({
-        error: ReasonPhrases.UNAUTHORIZED,
-        message: 'You must be authenticated to access this resource.'
-    });
-});
 export default testRouter;

@@ -46,12 +46,16 @@ app.get('/', (_: RequireAuthProp<Request>, res: Response) => {
     return res.json({message: "Server is running"});
 });
 
+interface ResponseError extends Error {
+    status: number;
+}
+
 // Add error handler
-app.use((err: Error, _: Request, res: Response, next: NextFunction) => {
-    console.error(err.stack);
-    res.status(StatusCodes.UNAUTHORIZED).json({
-        error: ReasonPhrases.UNAUTHORIZED,
-        message: 'You must be authenticated to access this resource.'
+app.use((err: ResponseError, _: Request, res: Response, next: NextFunction) => {
+    console.error(err);
+    res.status(err.status).json({
+        error: err.name,
+        message: err.message,
     });
 });
 
