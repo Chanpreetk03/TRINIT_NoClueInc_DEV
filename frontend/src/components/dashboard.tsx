@@ -7,201 +7,219 @@ import {CardTitle, CardDescription, CardContent, Card} from "@/components/ui/car
 import {useUser} from "@clerk/clerk-react";
 import {SVGProps} from "react";
 import {JSX} from "react/jsx-runtime";
-import { dasboard1 as Dasboard1 } from "@/components/component/dasboard1";
-import { dashboard2 as Dasboard2 } from "@/components/component/dasboard2";
-import { dashboard3 as Dasboard3 } from "@/components/component/dasboard3";
+import {Dashboard2} from "@/components/component/dashboard2.tsx";
+import {Dashboard1} from "@/components/component/dashboard1.tsx";
+import {Dashboard3} from "@/components/component/dashboard3.tsx";
+
 export function Dashboard() {
     const {user} = useUser();
     console.log(user);
     return (
-        {user.unsafeMetadata.role === "teacher" ? <div>
-            <Dasboard1/>
-            <Dasboard2/>
-            <Dasboard3/>
-        </div> : 
-        <div className="flex min-h-screen bg-gray-100/40 dark:bg-gray-800/40">
-            {/*<div className="hidden w-60 border-r lg:block">*/}
-            {/*    <div className="flex flex-col h-full">*/}
-            {/*        <a className="flex items-center h-14 justify-center font-semibold" href="#">*/}
-            {/*            Lingua Connect*/}
-            {/*        </a>*/}
-            {/*        <div className="flex items-center h-12 px-6">*/}
-            {/*            <Button className="rounded-full" size="icon" variant="outline">*/}
-            {/*                <LogOutIcon className="w-4 h-4"/>*/}
-            {/*                <span className="sr-only">Logout</span>*/}
-            {/*            </Button>*/}
-            {/*            <Button className="rounded-full ml-auto" size="icon" variant="outline">*/}
-            {/*                <UserIcon className="w-4 h-4"/>*/}
-            {/*                <span className="sr-only">Profile</span>*/}
-            {/*            </Button>*/}
-            {/*        </div>*/}
-            {/*    </div>*/}
-            {/*</div>*/}
-            <div className="flex-1 flex flex-col">
-                {/*<header className="flex items-center h-14 border-b gap-4 px-4 md:gap-6 lg:gap-8 md:px-6">*/}
-                {/*    <Button className="rounded-full" size="icon" variant="ghost">*/}
-                {/*        <MenuIcon className="w-4 h-4"/>*/}
-                {/*        <span className="sr-only">Toggle sidebar</span>*/}
-                {/*    </Button>*/}
-                {/*    <div className="flex-1 font-semibold text-lg">Home</div>*/}
-                {/*    <div>*/}
-                {/*        <div>*/}
-                {/*            <Button*/}
-                {/*                className="rounded-full border border-gray-200 w-8 h-8 dark:border-gray-800"*/}
-                {/*                id="example"*/}
-                {/*                size="icon"*/}
-                {/*                variant="ghost"*/}
-                {/*            >*/}
-                {/*                <BellIcon className="w-4 h-4"/>*/}
-                {/*                <span className="sr-only">Toggle notifications</span>*/}
-                {/*            </Button>*/}
-                {/*        </div>*/}
-                {/*        <div className="w-[300px] overflow-hidden">*/}
-                {/*            <div>Your package has been deployed to the production server</div>*/}
-                {/*            <div>The background job has completed successfully</div>*/}
-                {/*            <div/>*/}
-                {/*            <div>View all notifications</div>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*    <div>*/}
-                {/*        <div>*/}
-                {/*            <Button*/}
-                {/*                className="rounded-full border border-gray-200 w-8 h-8 dark:border-gray-800"*/}
-                {/*                id="user"*/}
-                {/*                size="icon"*/}
-                {/*                variant="ghost"*/}
-                {/*            >*/}
-                {/*                <img*/}
-                {/*                    alt="Avatar"*/}
-                {/*                    className="rounded-full"*/}
-                {/*                    height="32"*/}
-                {/*                    src="/placeholder.svg"*/}
-                {/*                    style={{*/}
-                {/*                        aspectRatio: "32/32",*/}
-                {/*                        objectFit: "cover",*/}
-                {/*                    }}*/}
-                {/*                    width="32"*/}
-                {/*                />*/}
-                {/*                <span className="sr-only">Toggle user menu</span>*/}
-                {/*            </Button>*/}
-                {/*        </div>*/}
-                {/*        <div>*/}
-                {/*            <div>Profile</div>*/}
-                {/*            <div>Settings</div>*/}
-                {/*            <div/>*/}
-                {/*            <div>Logout</div>*/}
-                {/*        </div>*/}
-                {/*    </div>*/}
-                {/*</header>*/}
-                <main className="flex-1 flex flex-col gap-4 p-4 md:gap-8 md:p-10">
-                    <div className="grid gap-4">
-                        <h1 className="font-semibold text-2xl">Welcome back, {user?.firstName}!</h1>
-                        <p className="text-gray-500 dark:text-gray-400">
-                            You are making great progress in your language learning journey. Keep up the good work!
-                        </p>
-                    </div>
-                    <Card className="p-0">
-                        <CardContent className="p-0">
-                            <div className="grid md:grid-cols-[200px_1fr] items-start gap-4 md:gap-8">
-                                <div className="flex flex-col gap-2">
-                                    <img
-                                        alt="Avatar"
-                                        className="rounded-full object-cover"
-                                        height="200"
-                                        src={user?.imageUrl}
-                                        style={{
-                                            aspectRatio: "200/200",
-                                            objectFit: "cover",
-                                        }}
-                                        width="200"
-                                    />
-                                    <div className="flex items-center gap-2">
-                                        <h2 className="font-semibold">Alice Johnson</h2>
-                                        <span
-                                            className="badge badge-secondary badge-outline">{user?.unsafeMetadata.role as String}</span>
-                                    </div>
-                                    <Button size="sm">Upgrade</Button>
-                                </div>
-                                <div className="grid gap-4">
-                                    <div className="grid gap-2">
-                                        <h3 className="font-semibold text-xl">My Courses</h3>
-                                        <div className="grid gap-2">
-                                            <Card>
-                                                <CardContent className="flex items-center gap-4">
-                                                    <PlayCircleIcon className="w-6 h-6 peer-disabled:opacity-50"/>
-                                                    <div className="grid gap-1">
-                                                        <CardTitle className="text-base">Introduction to
-                                                            Spanish</CardTitle>
-                                                        <CardDescription className="text-sm peer-disabled:opacity-70">
-                                                            Start your journey with basic phrases and vocabulary
-                                                        </CardDescription>
-                                                    </div>
-                                                    <ChevronRightIcon
-                                                        className="w-4 h-4 ml-auto peer-disabled:opacity-50"/>
-                                                </CardContent>
-
-                                                <CardContent className="flex items-center gap-4">
-                                                    <PlayCircleIcon className="w-6 h-6 peer-disabled:opacity-50"/>
-                                                    <div className="grid gap-1">
-                                                        <CardTitle className="text-base">Intermediate French
-                                                            Grammar</CardTitle>
-                                                        <CardDescription className="text-sm peer-disabled:opacity-70">
-                                                            Dive into complex sentence structures and verb conjugations
-                                                        </CardDescription>
-                                                    </div>
-                                                    <ChevronRightIcon
-                                                        className="w-4 h-4 ml-auto peer-disabled:opacity-50"/>
-                                                </CardContent>
-                                            </Card>
-                                        </div>
-
-                                        <h3 className="font-semibold text-xl">Upcoming Lessons</h3>
-                                        <div className="grid gap-2">
-                                            <Card>
-                                                <CardContent className="flex items-center gap-4">
-                                                    <CalendarIcon className="w-6 h-6 peer-disabled:opacity-50"/>
-                                                    <div className="grid gap-1">
-                                                        <CardTitle className="text-base">Conversation Practice: Role
-                                                            Play</CardTitle>
-                                                        <CardDescription className="text-sm peer-disabled:opacity-70">
-                                                            Improve your speaking skills with interactive dialogues
-                                                        </CardDescription>
-                                                    </div>
-                                                    <ChevronRightIcon
-                                                        className="w-4 h-4 ml-auto peer-disabled:opacity-50"/>
-                                                </CardContent>
-
-                                                <CardContent className="flex items-center gap-4">
-                                                    <CalendarIcon className="w-6 h-6 peer-disabled:opacity-50"/>
-                                                    <div className="grid gap-1">
-                                                        <CardTitle className="text-base">Vocabulary Workshop: Idioms and
-                                                            Expressions</CardTitle>
-                                                        <CardDescription className="text-sm peer-disabled:opacity-70">
-                                                            Learn common idiomatic phrases and how to use them
-                                                        </CardDescription>
-                                                    </div>
-                                                    <ChevronRightIcon
-                                                        className="w-4 h-4 ml-auto peer-disabled:opacity-50"/>
-                                                </CardContent>
-                                            </Card>
-                                        </div>
-                                    </div>
-                                </div>
+        <div>
+            {(user && user.unsafeMetadata.role === "Teacher") ? <div>
+                    <Dashboard1/>
+                    <Dashboard2/>
+                    <Dashboard3/>
+                </div> :
+                <div className="flex min-h-screen bg-gray-100/40 dark:bg-gray-800/40">
+                    {/*<div className="hidden w-60 border-r lg:block">*/}
+                    {/*    <div className="flex flex-col h-full">*/}
+                    {/*        <a className="flex items-center h-14 justify-center font-semibold" href="#">*/}
+                    {/*            Lingua Connect*/}
+                    {/*        </a>*/}
+                    {/*        <div className="flex items-center h-12 px-6">*/}
+                    {/*            <Button className="rounded-full" size="icon" variant="outline">*/}
+                    {/*                <LogOutIcon className="w-4 h-4"/>*/}
+                    {/*                <span className="sr-only">Logout</span>*/}
+                    {/*            </Button>*/}
+                    {/*            <Button className="rounded-full ml-auto" size="icon" variant="outline">*/}
+                    {/*                <UserIcon className="w-4 h-4"/>*/}
+                    {/*                <span className="sr-only">Profile</span>*/}
+                    {/*            </Button>*/}
+                    {/*        </div>*/}
+                    {/*    </div>*/}
+                    {/*</div>*/}
+                    <div className="flex-1 flex flex-col">
+                        {/*<header className="flex items-center h-14 border-b gap-4 px-4 md:gap-6 lg:gap-8 md:px-6">*/}
+                        {/*    <Button className="rounded-full" size="icon" variant="ghost">*/}
+                        {/*        <MenuIcon className="w-4 h-4"/>*/}
+                        {/*        <span className="sr-only">Toggle sidebar</span>*/}
+                        {/*    </Button>*/}
+                        {/*    <div className="flex-1 font-semibold text-lg">Home</div>*/}
+                        {/*    <div>*/}
+                        {/*        <div>*/}
+                        {/*            <Button*/}
+                        {/*                className="rounded-full border border-gray-200 w-8 h-8 dark:border-gray-800"*/}
+                        {/*                id="example"*/}
+                        {/*                size="icon"*/}
+                        {/*                variant="ghost"*/}
+                        {/*            >*/}
+                        {/*                <BellIcon className="w-4 h-4"/>*/}
+                        {/*                <span className="sr-only">Toggle notifications</span>*/}
+                        {/*            </Button>*/}
+                        {/*        </div>*/}
+                        {/*        <div className="w-[300px] overflow-hidden">*/}
+                        {/*            <div>Your package has been deployed to the production server</div>*/}
+                        {/*            <div>The background job has completed successfully</div>*/}
+                        {/*            <div/>*/}
+                        {/*            <div>View all notifications</div>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*    <div>*/}
+                        {/*        <div>*/}
+                        {/*            <Button*/}
+                        {/*                className="rounded-full border border-gray-200 w-8 h-8 dark:border-gray-800"*/}
+                        {/*                id="user"*/}
+                        {/*                size="icon"*/}
+                        {/*                variant="ghost"*/}
+                        {/*            >*/}
+                        {/*                <img*/}
+                        {/*                    alt="Avatar"*/}
+                        {/*                    className="rounded-full"*/}
+                        {/*                    height="32"*/}
+                        {/*                    src="/placeholder.svg"*/}
+                        {/*                    style={{*/}
+                        {/*                        aspectRatio: "32/32",*/}
+                        {/*                        objectFit: "cover",*/}
+                        {/*                    }}*/}
+                        {/*                    width="32"*/}
+                        {/*                />*/}
+                        {/*                <span className="sr-only">Toggle user menu</span>*/}
+                        {/*            </Button>*/}
+                        {/*        </div>*/}
+                        {/*        <div>*/}
+                        {/*            <div>Profile</div>*/}
+                        {/*            <div>Settings</div>*/}
+                        {/*            <div/>*/}
+                        {/*            <div>Logout</div>*/}
+                        {/*        </div>*/}
+                        {/*    </div>*/}
+                        {/*</header>*/}
+                        <main className="flex-1 flex flex-col gap-4 p-4 md:gap-8 md:p-10">
+                            <div className="grid gap-4">
+                                <h1 className="font-semibold text-2xl">Welcome back, {user?.firstName}!</h1>
+                                <p className="text-gray-500 dark:text-gray-400">
+                                    You are making great progress in your language learning journey. Keep up the
+                                    good
+                                    work!
+                                </p>
                             </div>
-                        </CardContent>
-                    </Card>
-                </main>
-            </div>
+                            <Card className="p-0">
+                                <CardContent className="p-0">
+                                    <div className="grid md:grid-cols-[200px_1fr] items-start gap-4 md:gap-8">
+                                        <div className="flex flex-col gap-2">
+                                            <img
+                                                alt="Avatar"
+                                                className="rounded-full object-cover"
+                                                height="200"
+                                                src={user?.imageUrl}
+                                                style={{
+                                                    aspectRatio: "200/200",
+                                                    objectFit: "cover",
+                                                }}
+                                                width="200"
+                                            />
+                                            <div className="flex items-center gap-2">
+                                                <h2 className="font-semibold">{user?.fullName}</h2>
+                                                <span
+                                                    className="badge badge-secondary badge-outline">{user?.unsafeMetadata.role as String}</span>
+                                            </div>
+                                            <Button size="sm">Upgrade</Button>
+                                        </div>
+                                        <div className="grid gap-4">
+                                            <div className="grid gap-2">
+                                                <h3 className="font-semibold text-xl">My Courses</h3>
+                                                <div className="grid gap-2">
+                                                    <Card>
+                                                        <CardContent className="flex items-center gap-4">
+                                                            <PlayCircleIcon
+                                                                className="w-6 h-6 peer-disabled:opacity-50"/>
+                                                            <div className="grid gap-1">
+                                                                <CardTitle className="text-base">Introduction to
+                                                                    Spanish</CardTitle>
+                                                                <CardDescription
+                                                                    className="text-sm peer-disabled:opacity-70">
+                                                                    Start your journey with basic phrases and
+                                                                    vocabulary
+                                                                </CardDescription>
+                                                            </div>
+                                                            <ChevronRightIcon
+                                                                className="w-4 h-4 ml-auto peer-disabled:opacity-50"/>
+                                                        </CardContent>
+
+                                                        <CardContent className="flex items-center gap-4">
+                                                            <PlayCircleIcon
+                                                                className="w-6 h-6 peer-disabled:opacity-50"/>
+                                                            <div className="grid gap-1">
+                                                                <CardTitle className="text-base">Intermediate French
+                                                                    Grammar</CardTitle>
+                                                                <CardDescription
+                                                                    className="text-sm peer-disabled:opacity-70">
+                                                                    Dive into complex sentence structures and verb
+                                                                    conjugations
+                                                                </CardDescription>
+                                                            </div>
+                                                            <ChevronRightIcon
+                                                                className="w-4 h-4 ml-auto peer-disabled:opacity-50"/>
+                                                        </CardContent>
+                                                    </Card>
+                                                </div>
+
+                                                <h3 className="font-semibold text-xl">Upcoming Lessons</h3>
+                                                <div className="grid gap-2">
+                                                    <Card>
+                                                        <CardContent className="flex items-center gap-4">
+                                                            <CalendarIcon
+                                                                className="w-6 h-6 peer-disabled:opacity-50"/>
+                                                            <div className="grid gap-1">
+                                                                <CardTitle className="text-base">Conversation
+                                                                    Practice:
+                                                                    Role
+                                                                    Play</CardTitle>
+                                                                <CardDescription
+                                                                    className="text-sm peer-disabled:opacity-70">
+                                                                    Improve your speaking skills with interactive
+                                                                    dialogues
+                                                                </CardDescription>
+                                                            </div>
+                                                            <ChevronRightIcon
+                                                                className="w-4 h-4 ml-auto peer-disabled:opacity-50"/>
+                                                        </CardContent>
+
+                                                        <CardContent className="flex items-center gap-4">
+                                                            <CalendarIcon
+                                                                className="w-6 h-6 peer-disabled:opacity-50"/>
+                                                            <div className="grid gap-1">
+                                                                <CardTitle className="text-base">Vocabulary
+                                                                    Workshop:
+                                                                    Idioms and
+                                                                    Expressions</CardTitle>
+                                                                <CardDescription
+                                                                    className="text-sm peer-disabled:opacity-70">
+                                                                    Learn common idiomatic phrases and how to use
+                                                                    them
+                                                                </CardDescription>
+                                                            </div>
+                                                            <ChevronRightIcon
+                                                                className="w-4 h-4 ml-auto peer-disabled:opacity-50"/>
+                                                        </CardContent>
+                                                    </Card>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </CardContent>
+                            </Card>
+                        </main>
+                    </div>
+                </div>
+            }
         </div>
-                                    }
     )
 }
 
 
 function PlayCircleIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
-            <Dasboard1/>
-            <Dasboard2/>
-            <Dasboard3/>
     return (
         <svg
             {...props}

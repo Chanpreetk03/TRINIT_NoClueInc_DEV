@@ -22,11 +22,11 @@ import {
     TableRow,
 } from "@/components/ui/table";
 
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import {Checkbox} from "@/components/ui/checkbox";
+import {Input} from "@/components/ui/input";
+import {Button} from "@/components/ui/button";
 
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import {ArrowUpDown, MoreHorizontal} from "lucide-react";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -37,34 +37,11 @@ import {
     DropdownMenuCheckboxItem,
 } from "@/components/ui/dropdown-menu";
 
-type Payment = {
-    id: string;
-    amount: number;
-    status: "pending" | "processing" | "success" | "failed";
-    email: string;
-};
-
-export const payments: Payment[] = [
-    {
-        id: "728ed52f",
-        amount: 100,
-        status: "pending",
-        email: "m@example.com",
-    },
-    {
-        id: "489e1d42",
-        amount: 125,
-        status: "processing",
-        email: "example@gmail.com",
-    },
-    // ...
-];
-
-export const columns: ColumnDef<Payment>[] = [
+export const columns = [
     {
         accessorKey: "amount",
         header: () => <div className="text-right">Amount</div>,
-        cell: ({ row }) => {
+        cell: ({row}: { row: any }) => {
             const amount = parseFloat(row.getValue("amount"));
             const formatted = new Intl.NumberFormat("en-US", {
                 style: "currency",
@@ -76,7 +53,7 @@ export const columns: ColumnDef<Payment>[] = [
     },
     {
         accessorKey: "email",
-        header: ({ column }) => {
+        header: ({column}: { column: any }) => {
             return (
                 <Button
                     variant="ghost"
@@ -85,14 +62,14 @@ export const columns: ColumnDef<Payment>[] = [
                     }
                 >
                     Email
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    <ArrowUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             );
         },
     },
     {
         id: "actions",
-        cell: ({ row }) => {
+        cell: ({row}: { row: any }) => {
             const payment = row.original;
 
             return (
@@ -100,7 +77,7 @@ export const columns: ColumnDef<Payment>[] = [
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="h-8 w-8 p-0">
                             <span className="sr-only">Open menu</span>
-                            <MoreHorizontal className="h-4 w-4" />
+                            <MoreHorizontal className="h-4 w-4"/>
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
@@ -112,7 +89,7 @@ export const columns: ColumnDef<Payment>[] = [
                         >
                             Copy payment ID
                         </DropdownMenuItem>
-                        <DropdownMenuSeparator />
+                        <DropdownMenuSeparator/>
                         <DropdownMenuItem>View customer</DropdownMenuItem>
                         <DropdownMenuItem>
                             View payment details
@@ -124,7 +101,7 @@ export const columns: ColumnDef<Payment>[] = [
     },
     {
         id: "select",
-        header: ({ table }) => (
+        header: ({table}: { table: any }) => (
             <Checkbox
                 checked={
                     table.getIsAllPageRowsSelected() ||
@@ -136,7 +113,7 @@ export const columns: ColumnDef<Payment>[] = [
                 aria-label="Select all"
             />
         ),
-        cell: ({ row }) => (
+        cell: ({row}: { row: any }) => (
             <Checkbox
                 checked={row.getIsSelected()}
                 onCheckedChange={(value: any) => row.toggleSelected(!!value)}
@@ -154,9 +131,9 @@ interface DataTableProps<TData, TValue> {
 }
 
 export function DataTable<TData, TValue>({
-    columns,
-    data,
-}: DataTableProps<TData, TValue>) {
+                                             columns,
+                                             data,
+                                         }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] =
         React.useState<ColumnFiltersState>([]);
@@ -217,7 +194,7 @@ export function DataTable<TData, TValue>({
                                         className="capitalize"
                                         checked={column.getIsVisible()}
                                         onCheckedChange={(value) =>
-                                            column.toggleVisibility(!!value)
+                                            column.toggleVisibility(value)
                                         }
                                     >
                                         {column.id}
@@ -238,10 +215,10 @@ export function DataTable<TData, TValue>({
                                             {header.isPlaceholder
                                                 ? null
                                                 : flexRender(
-                                                      header.column.columnDef
-                                                          .header,
-                                                      header.getContext()
-                                                  )}
+                                                    header.column.columnDef
+                                                        .header,
+                                                    header.getContext()
+                                                )}
                                         </TableHead>
                                     );
                                 })}
@@ -302,8 +279,7 @@ export function DataTable<TData, TValue>({
     );
 }
 
-async function getData(): Promise<Payment[]> {
-    // Fetch data from your API here.
+function getData() {
     return [
         {
             id: "728ed52f",
@@ -311,16 +287,21 @@ async function getData(): Promise<Payment[]> {
             status: "pending",
             email: "m@example.com",
         },
-        // ...
+        {
+            id: "489e1d42",
+            amount: 125,
+            status: "processing",
+            email: "example@gmail.com",
+        },
     ];
 }
 
-export default async function DemoPage() {
-    const data = await getData();
+export default function Explore() {
+    const data = getData();
 
     return (
         <div className="container mx-auto py-10">
-            <DataTable columns={columns} data={data} />
+            <DataTable columns={columns} data={data}/>
         </div>
     );
 }

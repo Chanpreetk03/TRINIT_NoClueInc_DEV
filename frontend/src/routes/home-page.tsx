@@ -4,9 +4,22 @@
  */
 import {Input} from "@/components/ui/input.tsx"
 import {Button} from "@/components/ui/button.tsx"
-import DemoPage from "./explore"
+import Explore from "./explore"
+import {useAuth, useUser} from "@clerk/clerk-react";
+import {useNavigate} from "react-router-dom";
 
 export function HomePage() {
+    const {isSignedIn} = useUser();
+    const {getToken} = useAuth();
+    const navigate = useNavigate();
+    const token = getToken().then((token) => {
+        console.log(token);
+        return token;
+    });
+    console.log(token);
+    if (isSignedIn) {
+        navigate("/dashboard");
+    }
     return (
         <div className="flex justify-center">
             <div className="flex flex-col min-h-[100dvh]">
@@ -151,7 +164,6 @@ export function HomePage() {
                     </section>
                 </main>
             </div>
-
         </div>
     )
 }

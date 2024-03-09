@@ -10,7 +10,6 @@ if (!PUBLISHABLE_KEY) {
 
 export default function RootLayout() {
     const navigate = useNavigate();
-
     return (
         <ClerkProvider navigate={navigate} publishableKey={PUBLISHABLE_KEY}>
             <Navbar/>

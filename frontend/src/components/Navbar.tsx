@@ -16,7 +16,7 @@ const Navbar = () => {
     return (
         <div className="navbar bg-base-100 px-20">
             <div className="flex-1">
-                <Link to={isSignedIn ? "/explore" : "/"} className="btn btn-ghost text-xl">LinguaConnect</Link>
+                <Link to={isSignedIn ? "/dashboard" : "/"} className="btn btn-ghost text-xl">LinguaConnect</Link>
                 {role && <div className="badge badge-secondary">{role}</div>}
             </div>
             <div className="flex-none gap-2">
@@ -41,14 +41,16 @@ const Navbar = () => {
                 {/*        </div>*/}
                 {/*    </div>*/}
                 {/*</div>*/}
-                {isSignedIn ? <div className="flex flex-row"><div role="button">
-                    {/*<Link to="/explore" className="btn">Explore</Link>*/}
-                    <Link to="/role-signup" className="btn">Explore</Link>
-                </div>
-                <div role="button">
-                    <Link to="/dashboard" className="btn">Dashboard</Link>
-                </div></div> : <div></div>}
-                
+                {isSignedIn ? <div className="flex flex-row">
+                    <div role="button">
+                        <Link to="/explore" className="btn">Explore</Link>
+                        {/*<Link to="/role-signup" className="btn">Explore</Link>*/}
+                    </div>
+                    <div role="button">
+                        <Link to="/dashboard" className="btn">Dashboard</Link>
+                    </div>
+                </div> : <div></div>}
+
                 <div tabIndex={0} role="button">
                     <SignedOut>
                         <a className="btn">
