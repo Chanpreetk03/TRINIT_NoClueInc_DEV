@@ -41,7 +41,7 @@ export function RoleSignUp() {
                                     role: "Teacher"
                                 }
                             });
-                            navigate('/dashboard')
+                            navigate('/teacher-signup')
                         }}
                     >
                         Teacher
