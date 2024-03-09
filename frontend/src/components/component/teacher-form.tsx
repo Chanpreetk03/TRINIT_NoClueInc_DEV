@@ -12,19 +12,18 @@ export function TeacherForm() {
     const handleSubmit = async (event: { preventDefault: () => void; }) => {
         event.preventDefault();
 
-        const response = await axios.get('http://trinit-noclueinc-dev-jntr.onrender.com/v1/health', {
+        const response = await axios.get('https://trinit-noclueinc-dev-jntr.onrender.com/v1/health', {
                 data: {
                     experience: experience,
                     languages: languages,
                     hours: hours
                 }
             }
-        ).then(() => {
-            setExperience('');
-            setLanguages('');
-            setHours('');
-        })
+        )
         console.log(response);
+        setExperience('');
+        setLanguages('');
+        setHours('');
     };
 
     return (
