@@ -41,14 +41,14 @@ const Navbar = () => {
                 {/*        </div>*/}
                 {/*    </div>*/}
                 {/*</div>*/}
-
-                <div role="button">
+                {isSignedIn ? <div className="flex flex-row"><div role="button">
                     {/*<Link to="/explore" className="btn">Explore</Link>*/}
                     <Link to="/role-signup" className="btn">Explore</Link>
                 </div>
                 <div role="button">
                     <Link to="/dashboard" className="btn">Dashboard</Link>
-                </div>
+                </div></div> : <div></div>}
+                
                 <div tabIndex={0} role="button">
                     <SignedOut>
                         <a className="btn">

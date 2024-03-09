@@ -4,6 +4,7 @@
  */
 import {Input} from "@/components/ui/input.tsx"
 import {Button} from "@/components/ui/button.tsx"
+import DemoPage from "./explore"
 
 export function HomePage() {
     return (
@@ -150,6 +151,7 @@ export function HomePage() {
                     </section>
                 </main>
             </div>
+
         </div>
     )
 }

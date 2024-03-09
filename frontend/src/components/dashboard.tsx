@@ -7,10 +7,18 @@ import {CardTitle, CardDescription, CardContent, Card} from "@/components/ui/car
 import {useUser} from "@clerk/clerk-react";
 import {SVGProps} from "react";
 import {JSX} from "react/jsx-runtime";
-
+import { dasboard1 as Dasboard1 } from "@/components/component/dasboard1";
+import { dashboard2 as Dasboard2 } from "@/components/component/dasboard2";
+import { dashboard3 as Dasboard3 } from "@/components/component/dasboard3";
 export function Dashboard() {
     const {user} = useUser();
+    console.log(user);
     return (
+        {user.unsafeMetadata.role === "teacher" ? <div>
+            <Dasboard1/>
+            <Dasboard2/>
+            <Dasboard3/>
+        </div> : 
         <div className="flex min-h-screen bg-gray-100/40 dark:bg-gray-800/40">
             {/*<div className="hidden w-60 border-r lg:block">*/}
             {/*    <div className="flex flex-col h-full">*/}
@@ -185,11 +193,15 @@ export function Dashboard() {
                 </main>
             </div>
         </div>
+                                    }
     )
 }
 
 
 function PlayCircleIcon(props: JSX.IntrinsicAttributes & SVGProps<SVGSVGElement>) {
+            <Dasboard1/>
+            <Dasboard2/>
+            <Dasboard3/>
     return (
         <svg
             {...props}
