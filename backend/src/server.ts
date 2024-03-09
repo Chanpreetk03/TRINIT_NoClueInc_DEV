@@ -53,10 +53,17 @@ interface ResponseError extends Error {
 // Add error handler
 app.use((err: ResponseError, _: Request, res: Response, next: NextFunction) => {
     console.error(err);
-    res.status(err.status).json({
-        error: err.name,
-        message: err.message,
-    });
+    if (err.status === undefined) {
+        res.status(StatusCodes.UNAUTHORIZED).json({
+            error: ReasonPhrases.UNAUTHORIZED,
+            message: "Unauthorized access",
+        });
+    } else {
+        res.status(err.status).json({
+            error: err.name,
+            message: err.message,
+        });
+    }
 });
 
 // **** Export default **** //

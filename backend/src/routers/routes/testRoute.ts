@@ -1,8 +1,6 @@
-import {NextFunction, Request, Response, Router} from "express";
+import {Router} from "express";
 import {PrismaClient} from "@prisma/client";
 import {ClerkExpressRequireAuth} from "@clerk/clerk-sdk-node";
-import {ReasonPhrases, StatusCodes} from "http-status-codes";
-import app from "@src/server";
 
 const testRouter = Router();
 
