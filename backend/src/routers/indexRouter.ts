@@ -4,6 +4,7 @@ import testRouter from "@src/routers/routes/testRoute";
 import healthRouter from "@src/routers/routes/healthRoute";
 import userRouter from "@src/routers/routes/userRoute";
 import {ClerkExpressRequireAuth} from "@clerk/clerk-sdk-node";
+import webhookRouter from "@src/routers/routes/webhookRoute";
 
 // **** Variables **** //
 
@@ -20,6 +21,7 @@ indexRouter.use('/test', testRouter);
 indexRouter.use('/user',
     // ClerkExpressRequireAuth(),
     userRouter)
+indexRouter.use('/webhook', webhookRouter);
 // **** Export default **** //
 
 export default indexRouter;
