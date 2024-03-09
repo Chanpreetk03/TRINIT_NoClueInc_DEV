@@ -1,3 +1,5 @@
+import { NavBar } from '@/components/component/nav-bar';
+import Navbar from '@/components/comps/Navbar';
 import React from 'react';
 
 interface HomePageProps {}
@@ -5,27 +7,7 @@ interface HomePageProps {}
 const HomePage: React.FC<HomePageProps> = () => {
     return (
     <div className="min-h-screen bg-background">
-      {/* Navbar */}
-        <nav className="bg-white shadow-md py-4 px-6 flex justify-between items-center">
-        <h1 className="text-xl font-bold">Your App Name</h1>
-        <ul className="flex space-x-4">
-            <li>
-            <a href="#" className="text-gray-700 hover:text-gray-900">
-                Home
-            </a>
-            </li>
-            <li>
-            <a href="#" className="text-gray-700 hover:text-gray-900">
-                About
-            </a>
-            </li>
-            <li>
-            <a href="#" className="text-gray-700 hover:text-gray-900">
-                Contact
-            </a>
-            </li>
-        </ul>
-        </nav>
+        <Navbar />
 
       {/* Hero Section */}
         <section className="hero min-h-screen flex flex-col justify-center items-center px-6">
