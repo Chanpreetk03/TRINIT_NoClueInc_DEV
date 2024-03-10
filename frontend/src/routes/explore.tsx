@@ -22,11 +22,11 @@ import {
     TableRow,
 } from "@/components/ui/table";
 
-import {Checkbox} from "@/components/ui/checkbox";
-import {Input} from "@/components/ui/input";
-import {Button} from "@/components/ui/button";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
-import {ArrowUpDown, MoreHorizontal} from "lucide-react";
+import { ArrowUpDown, MoreHorizontal } from "lucide-react";
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -41,7 +41,7 @@ export const columns = [
     {
         accessorKey: "amount",
         header: () => <div className="text-right">Amount</div>,
-        cell: ({row}: { row: any }) => {
+        cell: ({ row }: { row: any }) => {
             const amount = parseFloat(row.getValue("amount"));
             const formatted = new Intl.NumberFormat("en-US", {
                 style: "currency",
@@ -53,7 +53,7 @@ export const columns = [
     },
     {
         accessorKey: "email",
-        header: ({column}: { column: any }) => {
+        header: ({ column }: { column: any }) => {
             return (
                 <Button
                     variant="ghost"
@@ -62,14 +62,14 @@ export const columns = [
                     }
                 >
                     Email
-                    <ArrowUpDown className="ml-2 h-4 w-4"/>
+                    <ArrowUpDown className="ml-2 h-4 w-4" />
                 </Button>
             );
         },
     },
     {
         id: "actions",
-        cell: ({row}: { row: any }) => {
+        cell: ({ row }: { row: any }) => {
             const payment = row.original;
 
             return (
@@ -77,7 +77,7 @@ export const columns = [
                     <DropdownMenuTrigger asChild>
                         <Button variant="ghost" className="h-8 w-8 p-0">
                             <span className="sr-only">Open menu</span>
-                            <MoreHorizontal className="h-4 w-4"/>
+                            <MoreHorizontal className="h-4 w-4" />
                         </Button>
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
@@ -89,7 +89,7 @@ export const columns = [
                         >
                             Copy payment ID
                         </DropdownMenuItem>
-                        <DropdownMenuSeparator/>
+                        <DropdownMenuSeparator />
                         <DropdownMenuItem>View customer</DropdownMenuItem>
                         <DropdownMenuItem>
                             View payment details
@@ -101,7 +101,7 @@ export const columns = [
     },
     {
         id: "select",
-        header: ({table}: { table: any }) => (
+        header: ({ table }: { table: any }) => (
             <Checkbox
                 checked={
                     table.getIsAllPageRowsSelected() ||
@@ -113,7 +113,7 @@ export const columns = [
                 aria-label="Select all"
             />
         ),
-        cell: ({row}: { row: any }) => (
+        cell: ({ row }: { row: any }) => (
             <Checkbox
                 checked={row.getIsSelected()}
                 onCheckedChange={(value: any) => row.toggleSelected(!!value)}
@@ -131,9 +131,9 @@ interface DataTableProps<TData, TValue> {
 }
 
 export function DataTable<TData, TValue>({
-                                             columns,
-                                             data,
-                                         }: DataTableProps<TData, TValue>) {
+    columns,
+    data,
+}: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] =
         React.useState<ColumnFiltersState>([]);
@@ -215,10 +215,10 @@ export function DataTable<TData, TValue>({
                                             {header.isPlaceholder
                                                 ? null
                                                 : flexRender(
-                                                    header.column.columnDef
-                                                        .header,
-                                                    header.getContext()
-                                                )}
+                                                      header.column.columnDef
+                                                          .header,
+                                                      header.getContext()
+                                                  )}
                                         </TableHead>
                                     );
                                 })}
@@ -293,6 +293,36 @@ function getData() {
             status: "processing",
             email: "example@gmail.com",
         },
+        {
+            id: "489e1d42",
+            amount: 125,
+            status: "processing",
+            email: "example@gmail.com",
+        },
+        {
+            id: "489e1d42",
+            amount: 125,
+            status: "processing",
+            email: "example@gmail.com",
+        },
+        {
+            id: "489e1d42",
+            amount: 125,
+            status: "processing",
+            email: "example@gmail.com",
+        },
+        {
+            id: "489e1d42",
+            amount: 125,
+            status: "processing",
+            email: "example@gmail.com",
+        },
+        {
+            id: "489e1d42",
+            amount: 125,
+            status: "processing",
+            email: "example@gmail.com",
+        },
     ];
 }
 
@@ -301,7 +331,7 @@ export default function Explore() {
 
     return (
         <div className="container mx-auto py-10">
-            <DataTable columns={columns} data={data}/>
+            <DataTable columns={columns} data={data} />
         </div>
     );
 }
