@@ -1,8 +1,10 @@
 import {Link} from "react-router-dom";
+import {Course} from "@/components/component/course.tsx";
 
 export default function ContactPage() {
     return (
         <>
+            <Course/>
             <h1>Contact</h1>
             <p>This is a public page meant to contain a contact form and other related contact details.</p>
             <ul>

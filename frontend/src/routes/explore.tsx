@@ -2,58 +2,43 @@ import * as React from "react";
 
 import {
     ColumnDef,
+    ColumnFiltersState,
     flexRender,
     getCoreRowModel,
-    useReactTable,
-    getPaginationRowModel,
-    SortingState,
-    getSortedRowModel,
-    ColumnFiltersState,
     getFilteredRowModel,
+    getPaginationRowModel,
+    getSortedRowModel,
+    SortingState,
+    useReactTable,
     VisibilityState,
 } from "@tanstack/react-table";
 
-import {
-    Table,
-    TableBody,
-    TableCell,
-    TableHead,
-    TableHeader,
-    TableRow,
-} from "@/components/ui/table";
-
-import { Checkbox } from "@/components/ui/checkbox";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-
-import { ArrowUpDown, MoreHorizontal } from "lucide-react";
+import {Table, TableBody, TableCell, TableHead, TableHeader, TableRow,} from "@/components/ui/table";
+import {Input} from "@/components/ui/input";
+import {Button} from "@/components/ui/button";
 import {
     DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
     DropdownMenuCheckboxItem,
+    DropdownMenuContent,
+    DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import {ArrowUpDown} from "lucide-react";
+import {Link} from "react-router-dom";
 
 export const columns = [
     {
-        accessorKey: "amount",
-        header: () => <div className="text-right">Amount</div>,
-        cell: ({ row }: { row: any }) => {
-            const amount = parseFloat(row.getValue("amount"));
-            const formatted = new Intl.NumberFormat("en-US", {
-                style: "currency",
-                currency: "USD",
-            }).format(amount);
-
-            return <div className="text-right font-medium">{formatted}</div>;
-        },
+        accessorKey: "name",
+        header: () => <div>Name</div>,
+        cell: ({row}: { row: any }) => <div>{row.getValue("name")}</div>,
     },
     {
-        accessorKey: "email",
-        header: ({ column }: { column: any }) => {
+        accessorKey: "language",
+        header: () => <div>Language</div>,
+        cell: ({row}: { row: any }) => <div>{row.getValue("language")}</div>,
+    },
+    {
+        accessorKey: "experience",
+        header: ({column}: { column: any }) => {
             return (
                 <Button
                     variant="ghost"
@@ -61,67 +46,39 @@ export const columns = [
                         column.toggleSorting(column.getIsSorted() === "asc")
                     }
                 >
-                    Email
-                    <ArrowUpDown className="ml-2 h-4 w-4" />
+                    Experience
+                    <ArrowUpDown className="ml-2 h-4 w-4"/>
                 </Button>
             );
         },
+        cell: ({row}: { row: any }) => <div>{row.getValue("experience")}</div>,
     },
     {
-        id: "actions",
-        cell: ({ row }: { row: any }) => {
-            const payment = row.original;
-
+        accessorKey: "pricing",
+        header: ({column}: { column: any }) => {
             return (
-                <DropdownMenu>
-                    <DropdownMenuTrigger asChild>
-                        <Button variant="ghost" className="h-8 w-8 p-0">
-                            <span className="sr-only">Open menu</span>
-                            <MoreHorizontal className="h-4 w-4" />
-                        </Button>
-                    </DropdownMenuTrigger>
-                    <DropdownMenuContent align="end">
-                        <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                        <DropdownMenuItem
-                            onClick={() =>
-                                navigator.clipboard.writeText(payment.id)
-                            }
-                        >
-                            Copy payment ID
-                        </DropdownMenuItem>
-                        <DropdownMenuSeparator />
-                        <DropdownMenuItem>View customer</DropdownMenuItem>
-                        <DropdownMenuItem>
-                            View payment details
-                        </DropdownMenuItem>
-                    </DropdownMenuContent>
-                </DropdownMenu>
+                <Button
+                    variant="ghost"
+                    onClick={() =>
+                        column.toggleSorting(column.getIsSorted() === "asc")
+                    }
+                >
+                    Pricing
+                    <ArrowUpDown className="ml-2 h-4 w-4"/>
+                </Button>
             );
         },
+        cell: ({row}: { row: any }) => <div>{row.getValue("pricing")}</div>,
     },
     {
-        id: "select",
-        header: ({ table }: { table: any }) => (
-            <Checkbox
-                checked={
-                    table.getIsAllPageRowsSelected() ||
-                    (table.getIsSomePageRowsSelected() && "indeterminate")
-                }
-                onCheckedChange={(value: any) =>
-                    table.toggleAllPageRowsSelected(!!value)
-                }
-                aria-label="Select all"
-            />
-        ),
-        cell: ({ row }: { row: any }) => (
-            <Checkbox
-                checked={row.getIsSelected()}
-                onCheckedChange={(value: any) => row.toggleSelected(!!value)}
-                aria-label="Select row"
-            />
-        ),
-        enableSorting: false,
-        enableHiding: false,
+        id: "meetNow",
+        cell: () => {
+            return (
+                <Link to="/contact" className="btn btn-outline">
+                    Meet Now
+                </Link>
+            );
+        },
     },
 ];
 
@@ -131,9 +88,9 @@ interface DataTableProps<TData, TValue> {
 }
 
 export function DataTable<TData, TValue>({
-    columns,
-    data,
-}: DataTableProps<TData, TValue>) {
+                                             columns,
+                                             data,
+                                         }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] =
         React.useState<ColumnFiltersState>([]);
@@ -164,18 +121,20 @@ export function DataTable<TData, TValue>({
         <div>
             <div className="flex items-center py-4">
                 <Input
-                    placeholder="Filter emails..."
-                    value={
-                        (table
-                            .getColumn("email")
-                            ?.getFilterValue() as string) ?? ""
-                    }
-                    onChange={(event) =>
-                        table
-                            .getColumn("email")
-                            ?.setFilterValue(event.target.value)
-                    }
+                    placeholder="Search for Teacher"
+                    onChange={(event) => {
+                        const value = event.target.value;
+                        table.getColumn("name")?.setFilterValue(value);
+                    }}
                     className="max-w-sm"
+                />
+                <Input
+                    placeholder="Search for Language"
+                    onChange={(event) => {
+                        const value = event.target.value;
+                        table.getColumn("language")?.setFilterValue(value);
+                    }}
+                    className="max-w-sm ml-4"
                 />
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -215,10 +174,10 @@ export function DataTable<TData, TValue>({
                                             {header.isPlaceholder
                                                 ? null
                                                 : flexRender(
-                                                      header.column.columnDef
-                                                          .header,
-                                                      header.getContext()
-                                                  )}
+                                                    header.column.columnDef
+                                                        .header,
+                                                    header.getContext()
+                                                )}
                                         </TableHead>
                                     );
                                 })}
@@ -283,45 +242,73 @@ function getData() {
     return [
         {
             id: "728ed52f",
-            amount: 100,
-            status: "pending",
-            email: "m@example.com",
+            name: "Megan",
+            pricing: 100,
+            language: "English",
+            experience: 5
         },
         {
-            id: "489e1d42",
-            amount: 125,
-            status: "processing",
-            email: "example@gmail.com",
+            id: "728ed52g",
+            name: "John",
+            pricing: 120,
+            language: "Spanish",
+            experience: 3
         },
         {
-            id: "489e1d42",
-            amount: 125,
-            status: "processing",
-            email: "example@gmail.com",
+            id: "728ed52h",
+            name: "Samantha",
+            pricing: 90,
+            language: "French",
+            experience: 7
         },
         {
-            id: "489e1d42",
-            amount: 125,
-            status: "processing",
-            email: "example@gmail.com",
+            id: "728ed52i",
+            name: "James",
+            pricing: 110,
+            language: "English",
+            experience: 4
         },
         {
-            id: "489e1d42",
-            amount: 125,
-            status: "processing",
-            email: "example@gmail.com",
+            id: "728ed52j",
+            name: "Olivia",
+            pricing: 100,
+            language: "Spanish",
+            experience: 6
         },
         {
-            id: "489e1d42",
-            amount: 125,
-            status: "processing",
-            email: "example@gmail.com",
+            id: "728ed52k",
+            name: "Michael",
+            pricing: 120,
+            language: "French",
+            experience: 5
         },
         {
-            id: "489e1d42",
-            amount: 125,
-            status: "processing",
-            email: "example@gmail.com",
+            id: "728ed52l",
+            name: "Emily",
+            pricing: 90,
+            language: "English",
+            experience: 3
+        },
+        {
+            id: "728ed52m",
+            name: "Daniel",
+            pricing: 110,
+            language: "Spanish",
+            experience: 7
+        },
+        {
+            id: "728ed52n",
+            name: "Sophia",
+            pricing: 100,
+            language: "French",
+            experience: 4
+        },
+        {
+            id: "728ed52o",
+            name: "Matthew",
+            pricing: 120,
+            language: "English",
+            experience: 6
         },
     ];
 }
@@ -331,7 +318,7 @@ export default function Explore() {
 
     return (
         <div className="container mx-auto py-10">
-            <DataTable columns={columns} data={data} />
+            <DataTable columns={columns} data={data}/>
         </div>
     );
 }

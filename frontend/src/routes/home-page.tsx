@@ -4,7 +4,6 @@
  */
 import {Input} from "@/components/ui/input.tsx"
 import {Button} from "@/components/ui/button.tsx"
-import Explore from "./explore"
 import {useAuth, useUser} from "@clerk/clerk-react";
 import {useNavigate} from "react-router-dom";
 

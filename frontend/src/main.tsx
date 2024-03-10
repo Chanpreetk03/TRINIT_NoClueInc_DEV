@@ -16,6 +16,7 @@ import DashboardPage from './routes/dashboard'
 import RoleSignup from "@/routes/role-signup.tsx";
 import Explore from "@/routes/explore.tsx";
 import TeacherSignup from "@/routes/teacher-signup.tsx";
+import Meet from "@/routes/meet.tsx";
 // import InvoicesPage from './routes/dashboard.invoices'
 
 
@@ -35,7 +36,11 @@ const router = createBrowserRouter([
                     },
                     {path: "/role-signup", element: <RoleSignup/>},
                     {path: "/explore", element: <Explore/>},
-                    {path: "/teacher-signup", element: <TeacherSignup/>}]
+                    {path: "/teacher-signup", element: <TeacherSignup/>},
+                    {path: "/contact", element: <ContactPage/>},
+                    {path: "/meet", element: <Meet/>}
+
+                ]
 
             },
         ]
